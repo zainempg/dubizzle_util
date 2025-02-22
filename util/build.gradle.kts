@@ -55,9 +55,10 @@ dependencies {
 }
 
 publishing {
+
     publications {
         create<MavenPublication>("release") {
-            groupId = "com.dubizzle.util"  // Change to your GitHub username
+            groupId = "com.dubizzle"  // Change to your GitHub username
             artifactId = "util"             // Change to your library name
             version = "0.0.1"
 
@@ -70,11 +71,12 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/zainempg/util") // Change this
+            url = uri("https://maven.pkg.github.com/zainempg/notification") // Change this
 
             credentials {
                 username = System.getenv("GITHUB_ACTOR") ?: "zainempg"
-                password = System.getenv("GITHUB_TOKEN") ?: "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"
+//                password = System.getenv("GITHUB_TOKEN") ?: "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"
+                password = System.getenv("GITHUB_TOKEN") ?: "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"
             }
         }
     }
