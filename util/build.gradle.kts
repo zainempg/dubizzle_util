@@ -61,7 +61,7 @@ publishing {
         create<MavenPublication>("release") {
             groupId = "com.dubizzle"  // Change to your GitHub username
             artifactId = "util"             // Change to your library name
-            version = "0.0.1"
+            version = "0.0.3"
 
             afterEvaluate {
                 from(components["release"])
@@ -72,17 +72,15 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/zainempg/notification")
-            credentials {
-                username = "zainempg"
-//                password = System.getenv("GITHUB_TOKEN") ?: "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"
-                password = "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"
-//                password = System.getenv("GITHUB_TOKEN") ?: "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"
-            }
+            url = uri("https://maven.pkg.github.com/zainempg/dubizzle_util")
 //            credentials {
-//                username = System.getenv("GPR_USERNAME") ?: project.findProperty("GPR_USERNAME") as String
-//                password = System.getenv("GPR_TOKEN") ?: project.findProperty("GPR_TOKEN") as String
+//                username = "zainempg"
+//                password = "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"
 //            }
+            credentials {
+                username = System.getenv("GPR_USERNAME") ?: project.findProperty("GPR_USERNAME") as String?
+                password = System.getenv("GPR_TOKEN") ?: project.findProperty("GPR_TOKEN") as String?
+            }
         }
     }
 }
