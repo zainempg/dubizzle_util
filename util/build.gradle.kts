@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("plugin.serialization") version "2.1.10"
     id("maven-publish")
+    id("org.jetbrains.dokka") version "1.8.10" // Add Dokka plugin
 
 }
 
@@ -71,13 +72,21 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/zainempg/notification") // Change this
-
+            url = uri("https://maven.pkg.github.com/zainempg/dubizzle_util")
             credentials {
-                username = System.getenv("GITHUB_ACTOR") ?: "zainempg"
+                username = "zainempg"
 //                password = System.getenv("GITHUB_TOKEN") ?: "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"
-                password = System.getenv("GITHUB_TOKEN") ?: "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"
+                password = "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"
+//                password = System.getenv("GITHUB_TOKEN") ?: "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"
             }
+//            credentials {
+//                username = System.getenv("GPR_USERNAME") ?: project.findProperty("GPR_USERNAME") as String
+//                password = System.getenv("GPR_TOKEN") ?: project.findProperty("GPR_TOKEN") as String
+//            }
         }
     }
+}
+
+tasks.dokkaHtml.configure {
+    outputDirectory.set(buildDir.resolve("dokka"))
 }
