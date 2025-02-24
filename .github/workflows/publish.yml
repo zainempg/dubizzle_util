@@ -1,4 +1,5 @@
 name: Publish aar to GitHub Packages
+run-name: ${{ inputs.branch_name }} - ${{ inputs.release_version_name }}
 
 on:
   pull_request:
@@ -40,4 +41,4 @@ jobs:
         env:
           GPR_TOKEN: ${{ secrets.GPR_TOKEN }}
           GPR_USERNAME: ${{ secrets.GPR_USERNAME }}
-          VERSION_NAME: ${{ github.event.inputs.version_name }}
+          VERSION_NAME: ${{ github.event.inputs.release_version_name }}
