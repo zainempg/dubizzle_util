@@ -33,6 +33,7 @@ jobs:
       - name: Check coverage
         run: |
           coverage=$(python3 python/jacoco_coverage.py)
+          echo "Coverage output: $coverage"
           echo "coverage=$coverage" >> $GITHUB_ENV
 
       - name: Post coverage result
