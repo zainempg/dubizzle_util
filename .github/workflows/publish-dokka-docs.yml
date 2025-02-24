@@ -24,7 +24,7 @@ jobs:
 
       - name: List build directory contents
         run: ls -R build
-        
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
