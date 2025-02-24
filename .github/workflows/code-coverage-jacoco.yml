@@ -22,6 +22,9 @@ jobs:
       - name: Run tests with JaCoCo
         run: ./gradlew jacocoTestReport
 
+      - name: List build directory contents
+        run: ls util/build/reports
+
       - name: Check coverage
         run: |
           COVERAGE=$(grep -oP '(?<=<counter type="INSTRUCTION" missed=")\d+' util/build/reports/jacoco/jacocoTestReport.xml | awk '{s+=$1} END {print s}')
