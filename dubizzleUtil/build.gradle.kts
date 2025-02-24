@@ -9,7 +9,6 @@ plugins {
     id("jacoco") // Add JaCoCo plugin
     id("org.jetbrains.kotlinx.kover") version "0.9.1"
     id("org.sonarqube") version "4.0.0.2929"
-    id("io.github.burakkaygusuz.jacoco-json") version "0.1.0"
 
 
 
@@ -40,8 +39,7 @@ tasks.register<JacocoReport>("jacocoTestReport") {
     reports {
         xml.required.set(true)
         html.required.set(true)
-        json.required.set(tr
-        )
+
     }
 
     val fileFilter = listOf(
