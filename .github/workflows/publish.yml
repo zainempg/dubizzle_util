@@ -1,4 +1,4 @@
-name: Publish AAR Debug
+name: Publish aar to GitHub Packages
 
 on:
   pull_request:
