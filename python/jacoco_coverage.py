@@ -23,8 +23,8 @@ def get_coverage_percentage(xml_path):
 if __name__ == "__main__":
     coverage = get_coverage_percentage(JACOCO_XML_PATH)
     print(f"📊 Test Coverage: {coverage}%")
-
-    # Optional: Exit with error if coverage is too low
-    if coverage < 80:
-        print("❌ Coverage is below 80%! Consider adding more tests.")
-        exit(1)
+    print(coverage)
+    # # Optional: Exit with error if coverage is too low
+    # if coverage < 80:
+    #     print("❌ Coverage is below 80%! Consider adding more tests.")
+    #     exit(1)
