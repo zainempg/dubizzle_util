@@ -1,7 +1,7 @@
 name: Deploy Dokka Docs
 
 on:
-  push:
+  pull_request:
     branches:
       - develop  # Change if your default branch is different
 
