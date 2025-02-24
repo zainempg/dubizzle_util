@@ -27,8 +27,8 @@ jobs:
 
       - name: Check coverage
         run: |
-          COVERAGE=$(grep -oP '(?<=<counter type="INSTRUCTION" missed=")\d+' util/build/reports/jacoco/jacocoTestReport.xml | awk '{s+=$1} END {print s}')
-          TOTAL=$(grep -oP '(?<=<counter type="INSTRUCTION" covered=")\d+' util/build/reports/jacoco/jacocoTestReport.xml | awk '{s+=$1} END {print s}')
+          COVERAGE=$(grep -oP '(?<=<counter type="INSTRUCTION" missed=")\d+' dubizzleUtil/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml | awk '{s+=$1} END {print s}')
+          TOTAL=$(grep -oP '(?<=<counter type="INSTRUCTION" covered=")\d+' dubizzleUtil/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml | awk '{s+=$1} END {print s}')
           PERCENT=$(awk "BEGIN {print ($TOTAL / ($TOTAL + $COVERAGE)) * 100}")
 
           echo "Coverage: $PERCENT%"
