@@ -1,0 +1,35 @@
+name: Code Coverage Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Run tests with JaCoCo
+        run: ./gradlew jacocoTestReport
+
+      - name: Check coverage
+        run: |
+          COVERAGE=$(grep -oP '(?<=<counter type="INSTRUCTION" missed=")\d+' build/reports/jacoco/jacocoTestReport.xml | awk '{s+=$1} END {print s}')
+          TOTAL=$(grep -oP '(?<=<counter type="INSTRUCTION" covered=")\d+' build/reports/jacoco/jacocoTestReport.xml | awk '{s+=$1} END {print s}')
+          PERCENT=$(awk "BEGIN {print ($TOTAL / ($TOTAL + $COVERAGE)) * 100}")
+
+          echo "Coverage: $PERCENT%"
+          if (( $(echo "$PERCENT < 80" | bc -l) )); then
+            echo "Coverage is below 80%. Failing PR."
+            exit 1
+          fi
