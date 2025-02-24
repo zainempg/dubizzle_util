@@ -1,9 +1,9 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-//    id("kotlinx-serialization")
     kotlin("plugin.serialization") version "2.1.10"
-    id("maven-publish") // Add this plugin
+    id("maven-publish")
+    id("org.jetbrains.dokka") version "1.8.10" // Add Dokka plugin
 
 }
 
@@ -47,7 +47,6 @@ dependencies {
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
-//    androidTestImplementation(libs.espresso.core)
 
     testImplementation(libs.mockk)
     testImplementation (libs.test.core.ktx)
@@ -56,11 +55,12 @@ dependencies {
 }
 
 publishing {
+
     publications {
         create<MavenPublication>("release") {
-            groupId = "com.dubizzle.util"  // Change to your GitHub username
+            groupId = "com.dubizzle"  // Change to your GitHub username
             artifactId = "util"             // Change to your library name
-            version = "0.0.1"
+            version = System.getenv("VERSION_NAME")?.plus("_beta") ?: "0.0.3"
 
             afterEvaluate {
                 from(components["release"])
@@ -71,12 +71,22 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/zainempg/util") // Change this
-
+            url = uri("https://maven.pkg.github.com/zainempg/dubizzle_util")
             credentials {
-                username = System.getenv("GITHUB_ACTOR") ?: "zainempg"
-                password = System.getenv("GITHUB_TOKEN") ?: "your_personal_access_token"
+                val username = System.getenv("GPR_USERNAME") ?: project.findProperty("GPR_USERNAME") as String?
+                val password = System.getenv("GPR_TOKEN") ?: project.findProperty("GPR_TOKEN") as String?
+
+                if (username == null || password == null) {
+                    throw GradleException("GitHub Packages credentials are not set. Please set GPR_USERNAME and GPR_TOKEN environment variables.")
+                }
+
+                this.username = username
+                this.password = password
             }
         }
     }
+}
+
+tasks.dokkaHtml.configure {
+    outputDirectory.set(buildDir.resolve("dokka"))
 }

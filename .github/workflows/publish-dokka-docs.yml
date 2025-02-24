@@ -1,0 +1,29 @@
+name: Deploy Dokka Docs
+
+on:
+  push:
+    branches:
+      - develop  # Change if your default branch is different
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17' # Adjust to match your project
+
+      - name: Build Dokka documentation
+        run: ./gradlew dokkaHtml
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: build/dokka
