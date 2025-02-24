@@ -61,7 +61,7 @@ publishing {
         create<MavenPublication>("release") {
             groupId = "com.dubizzle"  // Change to your GitHub username
             artifactId = "util"             // Change to your library name
-            version = "0.0.1"
+            version = "0.0.3"
 
             afterEvaluate {
                 from(components["release"])
