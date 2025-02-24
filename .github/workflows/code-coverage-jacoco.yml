@@ -30,8 +30,5 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install Python dependencies
-        run: pip install xml.etree.ElementTree
-
       - name: Check coverage
         run: python3 python/jacoco_coverage.py
