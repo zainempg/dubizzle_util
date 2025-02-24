@@ -60,7 +60,7 @@ publishing {
         create<MavenPublication>("release") {
             groupId = "com.dubizzle"  // Change to your GitHub username
             artifactId = "util"             // Change to your library name
-            version = "0.0.3"
+            version = System.getenv("VERSION_NAME") ?: "0.0.3"
 
             afterEvaluate {
                 from(components["release"])
@@ -73,8 +73,15 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/zainempg/dubizzle_util")
             credentials {
-                username = System.getenv("GPR_USERNAME") ?: project.findProperty("GPR_USERNAME") as String
-                password = System.getenv("GPR_TOKEN") ?: project.findProperty("GPR_TOKEN") as String
+                val username = System.getenv("GPR_USERNAME") ?: project.findProperty("GPR_USERNAME") as String?
+                val password = System.getenv("GPR_TOKEN") ?: project.findProperty("GPR_TOKEN") as String?
+
+                if (username == null || password == null) {
+                    throw GradleException("GitHub Packages credentials are not set. Please set GPR_USERNAME and GPR_TOKEN environment variables.")
+                }
+
+                this.username = username
+                this.password = password
             }
         }
     }
