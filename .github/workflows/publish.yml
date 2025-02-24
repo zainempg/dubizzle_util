@@ -1,9 +1,22 @@
-name: Publish AAR Debug
+name: Publish aar to GitHub Packages
 
 on:
   pull_request:
     branches:
-      - develop
+      - master
+
+  workflow_dispatch:
+    inputs:
+      branch_name:
+        description: "Branch to build from (e.g., main, develop)"
+        required: true
+        default: "develop"
+      release_version_name:
+        description: "Enter version name (e.g., 1.0.0)"
+        required: true
+      release_notes:
+        description: "Release notes"
+        required: true
 
 jobs:
   build:
@@ -22,7 +35,9 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build and publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish to GitHub Packages
         run: ./gradlew publish
+        env:
+          GPR_TOKEN: ${{ secrets.GPR_TOKEN }}
+          GPR_USERNAME: ${{ secrets.GPR_USERNAME }}
+          VERSION_NAME: ${{ github.event.inputs.version_name }}

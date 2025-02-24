@@ -47,7 +47,6 @@ dependencies {
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
-//    androidTestImplementation(libs.espresso.core)
 
     testImplementation(libs.mockk)
     testImplementation (libs.test.core.ktx)
@@ -61,7 +60,7 @@ publishing {
         create<MavenPublication>("release") {
             groupId = "com.dubizzle"  // Change to your GitHub username
             artifactId = "util"             // Change to your library name
-            version = "0.0.1"
+            version = System.getenv("VERSION_NAME")?.plus("_beta") ?: "0.0.3"
 
             afterEvaluate {
                 from(components["release"])
@@ -74,15 +73,16 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/zainempg/dubizzle_util")
             credentials {
-                username = "zainempg"
-//                password = System.getenv("GITHUB_TOKEN") ?: "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"
-                password = "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"
-//                password = System.getenv("GITHUB_TOKEN") ?: "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"
+                val username = System.getenv("GPR_USERNAME") ?: project.findProperty("GPR_USERNAME") as String?
+                val password = System.getenv("GPR_TOKEN") ?: project.findProperty("GPR_TOKEN") as String?
+
+                if (username == null || password == null) {
+                    throw GradleException("GitHub Packages credentials are not set. Please set GPR_USERNAME and GPR_TOKEN environment variables.")
+                }
+
+                this.username = username
+                this.password = password
             }
-//            credentials {
-//                username = System.getenv("GPR_USERNAME") ?: project.findProperty("GPR_USERNAME") as String
-//                password = System.getenv("GPR_TOKEN") ?: project.findProperty("GPR_TOKEN") as String
-//            }
         }
     }
 }
