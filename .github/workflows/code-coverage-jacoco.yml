@@ -23,7 +23,7 @@ jobs:
         run: ./gradlew jacocoTestReport
 
       - name: List build directory contents
-        run: ls util/build/reports
+        run: ls
 
       - name: Check coverage
         run: |
