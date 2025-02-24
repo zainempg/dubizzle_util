@@ -25,5 +25,13 @@ jobs:
       - name: List build directory contents
         run: ls dubizzleUtil/build/reports/jacoco/jacocoTestReport/
 
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        run: pip install xml.etree.ElementTree
+
       - name: Check coverage
-        run: python python/jacoco_coverage.py
+        run: python3 python/jacoco_coverage.py
