@@ -47,7 +47,6 @@ dependencies {
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
-//    androidTestImplementation(libs.espresso.core)
 
     testImplementation(libs.mockk)
     testImplementation (libs.test.core.ktx)
@@ -73,10 +72,6 @@ publishing {
         maven {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/zainempg/dubizzle_util")
-//            credentials {
-//                username = "zainempg"
-//                password = "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"
-//            }
             credentials {
                 username = System.getenv("GPR_USERNAME") ?: project.findProperty("GPR_USERNAME") as String?
                 password = System.getenv("GPR_TOKEN") ?: project.findProperty("GPR_TOKEN") as String?
