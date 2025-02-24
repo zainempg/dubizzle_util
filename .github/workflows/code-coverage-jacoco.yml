@@ -26,13 +26,4 @@ jobs:
         run: ls dubizzleUtil/build/reports/jacoco/jacocoTestReport/
 
       - name: Check coverage
-        run: |
-          COVERAGE=$(grep -oP '(?<=<counter type="INSTRUCTION" missed=")\d+' dubizzleUtil/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml | awk '{s+=$1} END {print s}')
-          TOTAL=$(grep -oP '(?<=<counter type="INSTRUCTION" covered=")\d+' dubizzleUtil/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml | awk '{s+=$1} END {print s}')
-          PERCENT=$(awk "BEGIN {print ($TOTAL / ($TOTAL + $COVERAGE)) * 100}")
-
-          echo "Coverage: $PERCENT%"
-          if (( $(echo "$PERCENT < 80" | bc -l) )); then
-            echo "Coverage is below 80%. Failing PR."
-            exit 1
-          fi
+        run: python python/jacoco_coverage.py
