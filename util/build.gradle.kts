@@ -73,8 +73,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/zainempg/dubizzle_util")
             credentials {
-                username = System.getenv("GPR_USERNAME") ?: project.findProperty("GPR_USERNAME") as String?
-                password = System.getenv("GPR_TOKEN") ?: project.findProperty("GPR_TOKEN") as String?
+                username = System.getenv("GPR_USERNAME") ?: project.findProperty("GPR_USERNAME") as String
+                password = System.getenv("GPR_TOKEN") ?: project.findProperty("GPR_TOKEN") as String
             }
         }
     }
