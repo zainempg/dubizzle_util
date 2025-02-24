@@ -31,4 +31,23 @@ jobs:
           python-version: '3.x'
 
       - name: Check coverage
-        run: python3 python/jacoco_coverage.py
+        run: |
+          coverage=$(python3 python/jacoco_coverage.py)
+          echo "coverage=$coverage" >> $GITHUB_ENV
+
+      - name: Post coverage result
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const coverage = process.env.coverage;
+            const message = `📊 Test Coverage: ${coverage}%`;
+            const status = coverage < 80 ? "❌ Coverage is below 80%! Consider adding more tests." : "✅ Coverage is above 80%. Good job!";
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `${message}\n${status}`
+            });
+            if (coverage < 80) {
+              core.setFailed(status);
+            }
