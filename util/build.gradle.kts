@@ -60,7 +60,7 @@ publishing {
         create<MavenPublication>("release") {
             groupId = "com.dubizzle"  // Change to your GitHub username
             artifactId = "util"             // Change to your library name
-            version = System.getenv("VERSION_NAME") ?: "0.0.3"
+            version = System.getenv("VERSION_NAME")?.plus("_beta") ?: "0.0.3"
 
             afterEvaluate {
                 from(components["release"])
