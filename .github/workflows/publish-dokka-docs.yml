@@ -23,7 +23,7 @@ jobs:
         run: ./gradlew dokkaHtml
 
       - name: List build directory contents
-        run: ls
+        run: ls util
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
