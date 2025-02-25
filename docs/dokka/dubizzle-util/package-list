@@ -1,0 +1,27 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.dubizzle.util.date////PointingToDeclaration/dubizzle-util/com.dubizzle.util.date/index.html
+$dokka.location:com.dubizzle.util.date//getFormattedPassedTime/#android.content.Context#java.util.Date#kotlin.String#kotlin.String/PointingToDeclaration/dubizzle-util/com.dubizzle.util.date/get-formatted-passed-time.html
+$dokka.location:com.dubizzle.util.logger////PointingToDeclaration/dubizzle-util/com.dubizzle.util.logger/index.html
+$dokka.location:com.dubizzle.util.logger/Logger///PointingToDeclaration/dubizzle-util/com.dubizzle.util.logger/-logger/index.html
+$dokka.location:com.dubizzle.util.logger/Logger/debug/#kotlin.String#kotlin.String/PointingToDeclaration/dubizzle-util/com.dubizzle.util.logger/-logger/debug.html
+$dokka.location:com.dubizzle.util.logger/Logger/error/#kotlin.String#kotlin.Throwable#kotlin.String/PointingToDeclaration/dubizzle-util/com.dubizzle.util.logger/-logger/error.html
+$dokka.location:com.dubizzle.util.logger/Logger/info/#kotlin.String#kotlin.String/PointingToDeclaration/dubizzle-util/com.dubizzle.util.logger/-logger/info.html
+$dokka.location:com.dubizzle.util.logger/Tracker///PointingToDeclaration/dubizzle-util/com.dubizzle.util.logger/-tracker/index.html
+$dokka.location:com.dubizzle.util.logger/Tracker/trackEvent/#kotlin.String#kotlin.collections.Map[kotlin.String,kotlin.Any]/PointingToDeclaration/dubizzle-util/com.dubizzle.util.logger/-tracker/track-event.html
+$dokka.location:com.dubizzle.util.serializers////PointingToDeclaration/dubizzle-util/com.dubizzle.util.serializers/index.html
+$dokka.location:com.dubizzle.util.serializers/DateSerializer///PointingToDeclaration/dubizzle-util/com.dubizzle.util.serializers/-date-serializer/index.html
+$dokka.location:com.dubizzle.util.serializers/DateSerializer/DateSerializer/#/PointingToDeclaration/dubizzle-util/com.dubizzle.util.serializers/-date-serializer/-date-serializer.html
+$dokka.location:com.dubizzle.util.serializers/DateSerializer/descriptor/#/PointingToDeclaration/dubizzle-util/com.dubizzle.util.serializers/-date-serializer/descriptor.html
+$dokka.location:com.dubizzle.util.serializers/DateSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/dubizzle-util/com.dubizzle.util.serializers/-date-serializer/deserialize.html
+$dokka.location:com.dubizzle.util.serializers/DateSerializer/serialize/#kotlinx.serialization.encoding.Encoder#java.util.Date/PointingToDeclaration/dubizzle-util/com.dubizzle.util.serializers/-date-serializer/serialize.html
+$dokka.location:com.dubizzle.util////PointingToDeclaration/dubizzle-util/com.dubizzle.util/index.html
+$dokka.location:com.dubizzle.util/Localization///PointingToDeclaration/dubizzle-util/com.dubizzle.util/-localization/index.html
+$dokka.location:com.dubizzle.util/Localization/Localization/#java.util.Locale/PointingToDeclaration/dubizzle-util/com.dubizzle.util/-localization/-localization.html
+$dokka.location:com.dubizzle.util/Localization/attachBaseContext/#android.content.Context?/PointingToDeclaration/dubizzle-util/com.dubizzle.util/-localization/attach-base-context.html
+$dokka.location:com.dubizzle.util/Localization/locale/#/PointingToDeclaration/dubizzle-util/com.dubizzle.util/-localization/locale.html
+com.dubizzle.util
+com.dubizzle.util.date
+com.dubizzle.util.logger
+com.dubizzle.util.serializers
+
