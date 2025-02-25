@@ -37,6 +37,6 @@ jobs:
       - name: Deploy JaCoCo Report to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dubizzleUtil/build/reports/jacoco/jacocoTestReport/test/html
+          folder: dubizzleUtil/build/reports/jacoco/jacocoTestReport/html
           token: ${{ secrets.DEPLOY_TOKEN }}
           target-folder: docs/jacoco/
