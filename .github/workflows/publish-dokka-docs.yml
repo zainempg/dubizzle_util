@@ -23,10 +23,10 @@ jobs:
         run: ./gradlew dokkaHtml
 
       - name: List build directory contents
-        run: ls util/build/dokka
+        run: ls util/build/docs/dokka
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: util/build/dokka
+          folder: util/build/docs/dokka
           token: ${{ secrets.DEPLOY_TOKEN }}

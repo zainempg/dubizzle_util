@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("plugin.serialization") version "2.1.10"
     id("maven-publish")
-    id("org.jetbrains.dokka") version "2.0.0" // Add Dokka plugin
+    id("org.jetbrains.dokka") version "1.8.10"
     id("jacoco") // Add JaCoCo plugin
     id("org.jetbrains.kotlinx.kover") version "0.9.1"
     id("org.sonarqube") version "4.0.0.2929"
@@ -68,6 +68,9 @@ tasks.register<JacocoReport>("jacocoTestReport") {
     executionData.setFrom(files(execFile))
 }
 
+tasks.dokkaHtml.configure {
+    outputDirectory.set(buildDir.resolve("docs/dokka"))
+}
 
 
 android {
@@ -150,6 +153,3 @@ publishing {
     }
 }
 
-tasks.dokkaHtml.configure {
-    outputDirectory.set(buildDir.resolve("docs/dokka"))
-}
