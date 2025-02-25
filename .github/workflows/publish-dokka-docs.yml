@@ -30,3 +30,4 @@ jobs:
         with:
           folder: util/build/docs/dokka
           token: ${{ secrets.DEPLOY_TOKEN }}
+          target-folder: docs/dokka/
