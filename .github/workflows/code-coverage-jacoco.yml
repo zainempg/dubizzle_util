@@ -35,19 +35,21 @@ jobs:
           python-version: '3.x'
 
       - name: Check coverage
+        env:
+          CC_PERCENTAGE: ${{ secrets.CC_PERCENTAGE }}
         run: |
           coverage=$(python3 python/jacoco_coverage.py)
           previous_coverage=${{ env.CC_PERCENTAGE }}
           echo "Expected Code Coverage ${previous_coverage}%"
           echo "Coverage output: $coverage"
-          echo "coverage=$coverage" >> $GITHUB_ENV
+          echo "coverage=${coverage}%" >> $GITHUB_ENV
 
       - name: Post coverage result
         uses: actions/github-script@v6
         with:
           script: |
             const coverage = process.env.coverage;
-            const previousCoverage = process.env.CodeCoveragePercentage;
+            const previousCoverage = process.env.CC_PERCENTAGE;
             const message = `📊 Test Coverage: ${coverage}%`;
             const status = coverage < previousCoverage ? "❌ Coverage is below ${previousCoverage}%! Consider adding more tests." : "✅ Coverage is above ${previousCoverage}%. Good job!";
             github.rest.issues.createComment({
