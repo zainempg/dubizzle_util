@@ -1,11 +1,74 @@
+import com.fasterxml.jackson.module.kotlin.jsonMapper
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("plugin.serialization") version "2.1.10"
     id("maven-publish")
-    id("org.jetbrains.dokka") version "1.8.10" // Add Dokka plugin
+    id("org.jetbrains.dokka") version "2.0.0" // Add Dokka plugin
+    id("jacoco") // Add JaCoCo plugin
+    id("org.jetbrains.kotlinx.kover") version "0.9.1"
+    id("org.sonarqube") version "4.0.0.2929"
+
+
 
 }
+jacoco {
+    toolVersion = "0.8.8" // Specify the JaCoCo version
+}
+tasks.koverHtmlReport {
+    dependsOn("testDebugUnitTest")
+}
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "your_project_key")
+        property("sonar.organization", "your_organization")
+        property("sonar.host.url", "https://sonarcloud.io") // or self-hosted URL
+        property(
+            "sonar.coverage.jacoco.xmlReportPaths",
+            "build/reports/jacoco/jacocoTestReport.xml"
+        )
+
+    }
+}
+
+tasks.register<JacocoReport>("jacocoTestReport") {
+    dependsOn("testDebugUnitTest")
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+
+    }
+
+    val fileFilter = listOf(
+        "**/R.class",
+        "**/R\$*.class",
+        "**/BuildConfig.*",
+        "**/Manifest*.*",
+        "**/*Test*.*",
+        "android/**/*.*"
+    )
+
+    val debugTree = fileTree("${buildDir}/intermediates/javac/debug") {
+        exclude(fileFilter)
+    }
+
+    val kotlinDebugTree = fileTree("${buildDir}/tmp/kotlin-classes/debug") {
+        exclude(fileFilter)
+    }
+
+    val execFile = fileTree(buildDir) {
+        include("jacoco/testDebugUnitTest.exec")
+    }
+
+    sourceDirectories.setFrom(files("$projectDir/src/main/java"))
+    classDirectories.setFrom(files(debugTree, kotlinDebugTree))
+    executionData.setFrom(files(execFile))
+}
+
+
 
 android {
     namespace = "com.dubizzle.util"
