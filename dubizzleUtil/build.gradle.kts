@@ -33,44 +33,6 @@ sonarqube {
     }
 }
 
-tasks.register<JacocoReport>("jacocoTestReport") {
-    dependsOn("testDebugUnitTest")
-
-    reports {
-        xml.required.set(true)
-        html.required.set(true)
-
-    }
-
-    val fileFilter = listOf(
-        "**/R.class",
-        "**/R\$*.class",
-        "**/BuildConfig.*",
-        "**/Manifest*.*",
-        "**/*Test*.*",
-        "android/**/*.*"
-    )
-
-    val debugTree = fileTree("${buildDir}/intermediates/javac/debug") {
-        exclude(fileFilter)
-    }
-
-    val kotlinDebugTree = fileTree("${buildDir}/tmp/kotlin-classes/debug") {
-        exclude(fileFilter)
-    }
-
-    val execFile = fileTree(buildDir) {
-        include("jacoco/testDebugUnitTest.exec")
-    }
-
-    sourceDirectories.setFrom(files("$projectDir/src/main/java"))
-    classDirectories.setFrom(files(debugTree, kotlinDebugTree))
-    executionData.setFrom(files(execFile))
-}
-
-tasks.dokkaHtml.configure {
-    outputDirectory.set(buildDir.resolve("dokka"))
-}
 
 
 android {
@@ -152,4 +114,40 @@ publishing {
         }
     }
 }
+tasks.register<JacocoReport>("jacocoTestReport") {
+    dependsOn("testDebugUnitTest")
 
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+
+    }
+
+    val fileFilter = listOf(
+        "**/R.class",
+        "**/R\$*.class",
+        "**/BuildConfig.*",
+        "**/Manifest*.*",
+        "**/*Test*.*",
+        "android/**/*.*"
+    )
+
+    val debugTree = fileTree("${buildDir}/intermediates/javac/debug") {
+        exclude(fileFilter)
+    }
+
+    val kotlinDebugTree = fileTree("${buildDir}/tmp/kotlin-classes/debug") {
+        exclude(fileFilter)
+    }
+
+    val execFile = fileTree(buildDir) {
+        include("jacoco/testDebugUnitTest.exec")
+    }
+
+    sourceDirectories.setFrom(files("$projectDir/src/main/java"))
+    classDirectories.setFrom(files(debugTree, kotlinDebugTree))
+    executionData.setFrom(files(execFile))
+}
+tasks.dokkaHtml.configure {
+    outputDirectory.set(buildDir.resolve("dokka"))
+}
