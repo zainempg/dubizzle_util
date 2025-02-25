@@ -47,18 +47,20 @@ jobs:
 
       - name: Post coverage result
         uses: actions/github-script@v6
+        env:
+          CC_PERCENTAGE: 80
         with:
           script: |
             const coverage = process.env.coverage;
-            const previousCoverage = process.env.CC_PERCENTAGE;
+            const previous_coverage = process.env.CC_PERCENTAGE;
             const message = `📊 Test Coverage: ${coverage}%`;
-            const status = coverage < previousCoverage ? "❌ Coverage is below ${previousCoverage}%! Consider adding more tests." : "✅ Coverage is above ${previousCoverage}%. Good job!";
+            const status = coverage < previous_coverage ? "❌ Coverage is below ${previous_coverage}%! Consider adding more tests." : "✅ Coverage is above ${previous_coverage}%. Good job!";
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `${message}\n${status}`
             });
-            if (coverage < previousCoverage) {
+            if (coverage < previous_coverage) {
               core.setFailed(status);
             }
