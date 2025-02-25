@@ -22,12 +22,22 @@ jobs:
       - name: Build Dokka documentation
         run: ./gradlew dokkaHtml
 
+      - name: Run tests with JaCoCo
+        run: ./gradlew jacocoTestReport
+
       - name: List build directory contents
         run: find . -print
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy Dokka to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dubizzleUtil/build/dokka
           token: ${{ secrets.DEPLOY_TOKEN }}
           target-folder: /docs/dokka/
+
+      - name: Deploy JaCoCo Report to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build/reports/jacoco/test/html
+          token: ${{ secrets.DEPLOY_TOKEN }}
+          target-folder: docs/jacoco/
