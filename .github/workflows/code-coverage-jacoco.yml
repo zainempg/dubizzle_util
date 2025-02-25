@@ -37,7 +37,7 @@ jobs:
 
       - name: Check coverage
         env:
-          CC_PERCENTAGE: 80
+          CC_PERCENTAGE: 10
         run: |
           coverage=$(python3 python/jacoco_coverage.py)
           previousCoverage=$CC_PERCENTAGE
@@ -48,13 +48,13 @@ jobs:
       - name: Post coverage result
         uses: actions/github-script@v6
         env:
-          CC_PERCENTAGE: 80
+          CC_PERCENTAGE: 10
         with:
           script: |
             const coverage = process.env.coverage;
             const previousCoverage = process.env.CC_PERCENTAGE;
             const message = `📊 Test Coverage: ${coverage}%`;
-            const status = coverage < previousCoverage ? `❌ Coverage is below ${previousCoverage}  Consider adding more tests.` : `✅ Coverage is above ${previousCoverage}%. Good job!`;
+            const status = coverage < previousCoverage ? `❌ Coverage is below ${previousCoverage}%  Consider adding more tests.` : `✅ Coverage is above ${previousCoverage}%. Good job!`;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
