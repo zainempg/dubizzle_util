@@ -20,8 +20,8 @@ jobs:
 
       - name: EnvVar2
         env:
-          MY_SECRET: ${{ secrets.CC_PERCENTAGE }}
-        run: echo ${{MY_SECRET}}
+          MY_REPO_ENV: ${{ vars.MY_REPO_ENV }}
+        run: echo ${{MY_REPO_ENV}}
 
       - name: Checkout code
         uses: actions/checkout@v4
