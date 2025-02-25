@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: EnvVar
-        run: echo "$CC_PERCENTAGE"
+        run: echo $CC_PERCENTAGE
 
       - name: Checkout code
         uses: actions/checkout@v4
