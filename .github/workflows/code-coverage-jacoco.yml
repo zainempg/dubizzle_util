@@ -40,8 +40,8 @@ jobs:
           CC_PERCENTAGE: 80
         run: |
           coverage=$(python3 python/jacoco_coverage.py)
-          previous_coverage=$CC_PERCENTAGE
-          echo "Expected Code Coverage ${previous_coverage}%"
+          previousCoverage=$CC_PERCENTAGE
+          echo "Expected Code Coverage ${previousCoverage}%"
           echo "Coverage output: $coverage"
           echo "coverage=${coverage}%" >> $GITHUB_ENV
 
@@ -54,13 +54,13 @@ jobs:
             const coverage = process.env.coverage;
             const previousCoverage = process.env.CC_PERCENTAGE;
             const message = `📊 Test Coverage: ${coverage}%`;
-            const status = coverage < previous_coverage ? "❌ Coverage is below ${previous_coverage}%! Consider adding more tests." : "✅ Coverage is above ${previous_coverage}%. Good job!";
+            const status = coverage < previousCoverage ? "❌ Coverage is below ${previousCoverage}%! Consider adding more tests." : "✅ Coverage is above ${previousCoverage}%. Good job!";
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `${message}\n${status}`
             });
-            if (coverage < previous_coverage) {
+            if (coverage < previousCoverage) {
               core.setFailed(status);
             }
