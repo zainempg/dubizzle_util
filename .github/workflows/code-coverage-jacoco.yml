@@ -44,8 +44,8 @@ jobs:
           python-version: '3.x'
 
       - name: Check coverage
-#        env:
-#          CC_PERCENTAGE: $CC_PERCENTAGE
+        #        env:
+        #          CC_PERCENTAGE: $CC_PERCENTAGE
         run: |
           coverage=$(python3 python/jacoco_coverage.py)
           previous_coverage=$CC_PERCENTAGE
