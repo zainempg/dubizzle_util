@@ -54,7 +54,7 @@ jobs:
             const coverage = process.env.coverage;
             const previousCoverage = process.env.CC_PERCENTAGE;
             const message = `📊 Test Coverage: ${coverage}%`;
-            const status = coverage < previousCoverage ? `❌ Coverage is below ${coverage}  Consider adding more tests.` : `✅ Coverage is above ${previousCoverage}%. Good job!`;
+            const status = coverage < previousCoverage ? `❌ Coverage is below ${previousCoverage}  Consider adding more tests.` : `✅ Coverage is above ${previousCoverage}%. Good job!`;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
