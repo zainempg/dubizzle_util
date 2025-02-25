@@ -16,7 +16,12 @@ jobs:
 
     steps:
       - name: EnvVar
-        run: echo $CC_PERCENTAGE
+        run: echo ${{CC_PERCENTAGE}}
+
+      - name: EnvVar2
+        env:
+          MY_SECRET: ${{ secrets.CC_PERCENTAGE }}
+        run: echo ${{MY_SECRET}}
 
       - name: Checkout code
         uses: actions/checkout@v4
