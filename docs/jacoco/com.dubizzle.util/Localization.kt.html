@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Localization.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dubizzleUtil</a> &gt; <a href="index.source.html" class="el_package">com.dubizzle.util</a> &gt; <span class="el_source">Localization.kt</span></div><h1>Localization.kt</h1><pre class="source lang-java linenums">package com.dubizzle.util
+
+import android.content.Context
+import android.content.res.Configuration
+import java.util.Locale
+
+/**
+ * This class provides functionality to manage and update the application's locale.
+ * It allows changing the locale programmatically and applying it to the application context.
+ *
+ * @property locale The target [Locale] to be applied.
+ */
+<span class="nc" id="L13">class Localization(var locale: Locale) {</span>
+
+    /**
+     * Attaches a new base context with the specified locale.
+     *
+     * This function takes an existing context and modifies its configuration to use a new locale.
+     * It then creates a new context based on the modified configuration. This is useful for
+     * changing the application's language on the fly.
+     *
+     * The function sets the default locale for the JVM to the provided locale. Then, it creates
+     * a new configuration based on the original context's configuration and overrides the locale
+     * within that configuration. Finally, it uses `createConfigurationContext` to generate a
+     * brand-new context using the updated configuration.
+     *
+     * @param context The original context. Can be null.
+     * @return A new context with the specified locale, or the original context if the input was null.
+     *         If the original context was not null but an error occur when creating the new context,
+     *         it will return null.
+     *
+     * @see Context.createConfigurationContext
+     * @see Configuration.setLocale
+     * @see Locale.setDefault
+     *
+     * @sample
+     * ```
+     * // Example usage within an Activity or Application class:
+     * override fun attachBaseContext(base: Context) {
+     *     val newLocale = Locale(&quot;es&quot;, &quot;ES&quot;) // Example: Spanish (Spain)
+     *     val newContext = attachBaseContext(base, newLocale)
+     *     super.attachBaseContext(newContext ?: base)
+     * }
+     *
+     * // Example usage to get a new context:
+     * val myNewContext: Context? = attachBaseContext(applicationContext, Locale(&quot;fr&quot;, &quot;FR&quot;))
+     * ```
+     */
+    fun attachBaseContext(context: Context?): Context? {
+<span class="nc" id="L50">        Locale.setDefault(locale);</span>
+<span class="nc bnc" id="L51" title="All 4 branches missed.">        val config = Configuration(context?.resources?.configuration)</span>
+<span class="nc" id="L52">        config.setLocale(locale)</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        return context?.createConfigurationContext(config)</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

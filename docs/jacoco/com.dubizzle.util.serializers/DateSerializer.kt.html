@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DateSerializer.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dubizzleUtil</a> &gt; <a href="index.source.html" class="el_package">com.dubizzle.util.serializers</a> &gt; <span class="el_source">DateSerializer.kt</span></div><h1>DateSerializer.kt</h1><pre class="source lang-java linenums">package com.dubizzle.util.serializers
+
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
+/**
+ * [KSerializer] implementation for [Date] objects.
+ *
+ * This class provides serialization and deserialization logic for [Date] objects
+ * using a specific ISO 8601 date/time format.
+ *
+ * The date/time format used is &quot;yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'&quot;, representing:
+ *   - yyyy: Year (e.g., 2023)
+ *   - MM: Month (01-12)
+ *   - dd: Day of month (01-31)
+ *   - 'T': Literal character 'T' separating date and time
+ *   - HH: Hour (00-23)
+ *   - mm: Minute (00-59)
+ *   - ss: Second (00-59)
+ *   - SSSSSS: Microseconds (000000-999999)
+ *   - 'Z': Literal character 'Z' indicating UTC timezone
+ *
+ * Example of a formatted date string: &quot;2025-01-05T05:37:47.097830Z&quot;
+ *
+ * This serializer is intended for use with kotlinx.serialization.
+ */
+<span class="fc" id="L34">class DateSerializer : KSerializer&lt;Date&gt; {</span>
+
+    //   sample date &quot;2025-01-05T05:37:47.097830Z&quot;
+<span class="fc" id="L37">    private val dateFormat = SimpleDateFormat(&quot;yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'&quot;, Locale.US)</span>
+<span class="fc" id="L38">    override val descriptor: SerialDescriptor =</span>
+<span class="fc" id="L39">        PrimitiveSerialDescriptor(&quot;Date&quot;, PrimitiveKind.STRING)</span>
+
+    override fun serialize(encoder: Encoder, value: Date) {
+<span class="nc" id="L42">        val dateString = dateFormat.format(value)</span>
+<span class="nc" id="L43">        encoder.encodeString(dateString)</span>
+<span class="nc" id="L44">    }</span>
+
+    override fun deserialize(decoder: Decoder): Date {
+<span class="fc" id="L47">        val dateString = decoder.decodeString()</span>
+<span class="fc" id="L48">        return dateFormat.parse(dateString)!!</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

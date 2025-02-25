@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>dateutil.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dubizzleUtil</a> &gt; <a href="index.source.html" class="el_package">com.dubizzle.util.date</a> &gt; <span class="el_source">dateutil.kt</span></div><h1>dateutil.kt</h1><pre class="source lang-java linenums">package com.dubizzle.util.date
+
+import android.content.Context
+import com.dubizzle.util.R
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
+
+fun getFormattedPassedTime(
+    context:Context,
+    date: Date,
+    strDesiredDateFormat: String,
+    currentLanguage: String
+): String {
+<span class="nc" id="L16">    val currentDate = Date(System.currentTimeMillis())</span>
+
+<span class="nc" id="L18">    val days = ((currentDate.time - date.time) / (1000 * 60 * 60 * 24)).toInt()</span>
+<span class="nc" id="L19">    val months = days / 30</span>
+<span class="nc" id="L20">    val years = months / 12</span>
+
+<span class="nc bnc" id="L22" title="All 6 branches missed.">    if (years &gt;= 1 || months &gt;= 1 || days &gt;= 6) {</span>
+        // return normal date
+<span class="nc" id="L24">        val sdf = SimpleDateFormat(strDesiredDateFormat, Locale.getDefault())</span>
+<span class="nc" id="L25">        return sdf.format(date)</span>
+    }
+
+<span class="nc" id="L28">    return when {</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        days &gt; 1 -&gt; context.getString(R.string.str_days_ago, days.toString())</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        days == 1 -&gt; context.getString(R.string.str_yesterday)</span>
+<span class="nc" id="L31">        else -&gt; {</span>
+<span class="nc" id="L32">            val seconds = ((currentDate.time - date.time) / 1000).toInt()</span>
+<span class="nc" id="L33">            val minutes = (seconds / 60).toInt()</span>
+<span class="nc" id="L34">            val hours = (minutes / 60).toInt()</span>
+
+<span class="nc" id="L36">            when {</span>
+<span class="nc bnc" id="L37" title="All 4 branches missed.">                currentLanguage == &quot;ar&quot; &amp;&amp; hours &gt; 10 -&gt; context.getString(</span>
+<span class="nc" id="L38">                    R.string.str_more_than_ten_hours,</span>
+<span class="nc" id="L39">                    hours.toString()</span>
+                )
+
+<span class="nc bnc" id="L42" title="All 8 branches missed.">                currentLanguage == &quot;ar&quot; &amp;&amp; hours in 3..10 -&gt; context.getString(</span>
+<span class="nc" id="L43">                    R.string.str_three_to_ten_hours,</span>
+<span class="nc" id="L44">                    hours.toString()</span>
+                )
+
+<span class="nc bnc" id="L47" title="All 4 branches missed.">                currentLanguage == &quot;ar&quot; &amp;&amp; hours == 2 -&gt; context.getString(R.string.str_two_hours_ago)</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">                hours &gt; 1 -&gt; context.getString(R.string.str_hours_ago, hours.toString())</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">                hours == 1 -&gt; context.getString(R.string.str_one_hour_ago)</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">                minutes &gt; 1 -&gt; context.getString(R.string.str_minutes_ago, minutes.toString())</span>
+<span class="nc" id="L51">                else -&gt; context.getString(R.string.str_just_now)</span>
+            }
+        }
+    }
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
