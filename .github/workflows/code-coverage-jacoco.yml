@@ -37,6 +37,8 @@ jobs:
       - name: Check coverage
         run: |
           coverage=$(python3 python/jacoco_coverage.py)
+          previous_coverage=${{ env.CodeCoveragePercentage }}
+          echo "Expected Code Coverage $previous_coverage"
           echo "Coverage output: $coverage"
           echo "coverage=$coverage" >> $GITHUB_ENV
 
@@ -45,14 +47,15 @@ jobs:
         with:
           script: |
             const coverage = process.env.coverage;
+            const previousCoverage = process.env.CodeCoveragePercentage;
             const message = `📊 Test Coverage: ${coverage}%`;
-            const status = coverage < 80 ? "❌ Coverage is below 80%! Consider adding more tests." : "✅ Coverage is above 80%. Good job!";
+            const status = coverage < previousCoverage ? "❌ Coverage is below ${previousCoverage}%! Consider adding more tests." : "✅ Coverage is above ${previousCoverage}%. Good job!";
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `${message}\n${status}`
             });
-            if (coverage < 80) {
+            if (coverage < previousCoverage) {
               core.setFailed(status);
             }
