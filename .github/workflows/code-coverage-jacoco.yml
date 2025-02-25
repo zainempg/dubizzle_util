@@ -39,7 +39,7 @@ jobs:
           CC_PERCENTAGE: $CC_PERCENTAGE
         run: |
           coverage=$(python3 python/jacoco_coverage.py)
-          previous_coverage=$$CC_PERCENTAGE
+          previous_coverage=${{ env.CC_PERCENTAGE }}
           echo "Expected Code Coverage ${previous_coverage}%"
           echo "Coverage output: $coverage"
           echo "coverage=${coverage}%" >> $GITHUB_ENV
