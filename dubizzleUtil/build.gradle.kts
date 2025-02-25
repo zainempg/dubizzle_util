@@ -69,7 +69,7 @@ tasks.register<JacocoReport>("jacocoTestReport") {
 }
 
 tasks.dokkaHtml.configure {
-    outputDirectory.set(buildDir.resolve("docs/dokka"))
+    outputDirectory.set(buildDir.resolve("dokka"))
 }
 
 
