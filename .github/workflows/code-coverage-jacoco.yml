@@ -15,14 +15,6 @@ jobs:
 
 
     steps:
-#      - name: EnvVar
-#        run: echo ${{CC_PERCENTAGE}}
-
-      - name: EnvVar2
-        env:
-          MY_REPO_ENV: ${{ vars.MY_REPO_ENV }}
-        run: echo ${{MY_REPO_ENV}}
-
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -44,8 +36,8 @@ jobs:
           python-version: '3.x'
 
       - name: Check coverage
-        #        env:
-        #          CC_PERCENTAGE: $CC_PERCENTAGE
+        env:
+          CC_PERCENTAGE: 80
         run: |
           coverage=$(python3 python/jacoco_coverage.py)
           previous_coverage=$CC_PERCENTAGE
