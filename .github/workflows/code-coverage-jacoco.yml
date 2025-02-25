@@ -15,8 +15,8 @@ jobs:
 
 
     steps:
-      - name: EnvVar
-        run: echo ${{CC_PERCENTAGE}}
+#      - name: EnvVar
+#        run: echo ${{CC_PERCENTAGE}}
 
       - name: EnvVar2
         env:
