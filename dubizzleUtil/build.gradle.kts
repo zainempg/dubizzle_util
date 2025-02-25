@@ -151,5 +151,5 @@ publishing {
 }
 
 tasks.dokkaHtml.configure {
-    outputDirectory.set(buildDir.resolve("dokka"))
+    outputDirectory.set(buildDir.resolve("docs/dokka"))
 }

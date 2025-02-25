@@ -3,7 +3,7 @@ name: Deploy Dokka Docs
 on:
   pull_request:
     branches:
-      - master  # publish when PR created toward master branch
+      - develop  # publish when PR created toward master branch
 
 jobs:
   deploy:
