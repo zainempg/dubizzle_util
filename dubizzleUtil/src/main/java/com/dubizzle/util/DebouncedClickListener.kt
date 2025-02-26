@@ -1,4 +1,4 @@
-package dubizzle.com.uilibrary.util
+package dubizzle.com.util
 
 import android.os.SystemClock
 import android.view.View
