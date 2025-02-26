@@ -20,8 +20,15 @@ $dokka.location:com.dubizzle.util/Localization///PointingToDeclaration/dubizzle
 $dokka.location:com.dubizzle.util/Localization/Localization/#java.util.Locale/PointingToDeclaration/dubizzle-util/com.dubizzle.util/-localization/-localization.html
 $dokka.location:com.dubizzle.util/Localization/attachBaseContext/#android.content.Context?/PointingToDeclaration/dubizzle-util/com.dubizzle.util/-localization/attach-base-context.html
 $dokka.location:com.dubizzle.util/Localization/locale/#/PointingToDeclaration/dubizzle-util/com.dubizzle.util/-localization/locale.html
+$dokka.location:dubizzle.com.uilibrary.util////PointingToDeclaration/dubizzle-util/dubizzle.com.uilibrary.util/index.html
+$dokka.location:dubizzle.com.uilibrary.util/DebouncedClickListener///PointingToDeclaration/dubizzle-util/dubizzle.com.uilibrary.util/-debounced-click-listener/index.html
+$dokka.location:dubizzle.com.uilibrary.util/DebouncedClickListener/DebouncedClickListener/#kotlin.Int#kotlin.Function1[android.view.View,kotlin.Unit]/PointingToDeclaration/dubizzle-util/dubizzle.com.uilibrary.util/-debounced-click-listener/-debounced-click-listener.html
+$dokka.location:dubizzle.com.uilibrary.util/DebouncedClickListener/onClick/#android.view.View/PointingToDeclaration/dubizzle-util/dubizzle.com.uilibrary.util/-debounced-click-listener/on-click.html
+$dokka.location:dubizzle.com.uilibrary.util/DebouncedClickListenerObject///PointingToDeclaration/dubizzle-util/dubizzle.com.uilibrary.util/-debounced-click-listener-object/index.html
+$dokka.location:dubizzle.com.uilibrary.util/DebouncedClickListenerObject/setDebounceClickListener/android.view.View#kotlin.Function1[android.view.View,kotlin.Unit]/PointingToDeclaration/dubizzle-util/dubizzle.com.uilibrary.util/-debounced-click-listener-object/set-debounce-click-listener.html
 com.dubizzle.util
 com.dubizzle.util.date
 com.dubizzle.util.logger
 com.dubizzle.util.serializers
+dubizzle.com.uilibrary.util
 
